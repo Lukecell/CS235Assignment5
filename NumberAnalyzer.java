@@ -1,5 +1,13 @@
-class NumberAnalyzer <N extends Number & Comparable>
+import java.util.*;
+
+class NumberAnalyzer <N extends Number & Comparable >
 {
+	private Class<N> typeOfN;
+
+    public NumberAnalyzer(Class<N> typeParameterClass) {
+        this.typeOfN = typeParameterClass;
+    }
+
 	/**
 	* Finds the smallest value
 	* @param N[] The array to be parsed
@@ -17,22 +25,6 @@ class NumberAnalyzer <N extends Number & Comparable>
 		}
 
 		return arr[min];
-	}
-
-	/**
-	* Converts an object to generic
-	* @param Object The object to be converted
-	* @return N The generic casted version
-	*/
-
-	public N convertInstanceOfObject(Object o) {
-		try 
-		{
-			return (N) o;
-		} catch (ClassCastException e) 
-		{
-			return Math.floor(o);
-		}
 	}
 
 	/**
@@ -62,14 +54,20 @@ class NumberAnalyzer <N extends Number & Comparable>
 
 	public N findAvg(N arr[])
 	{
-		double total = 0;
+		Double total = new Double(0);
 
 		for(int i = 0; i < arr.length; i++)
 			total = total + arr[i].doubleValue();
 
 		total = total/arr.length;
 
-		return convertInstanceOfObject(total);
+		try{
+			return typeOfN.cast(total);
+		}
+		catch(ClassCastException e)
+		{
+			return typeOfN.cast(total.intValue());
+		}
 	}
 
 	/**
@@ -80,11 +78,17 @@ class NumberAnalyzer <N extends Number & Comparable>
 
 	public N findTotal(N arr[])
 	{
-		double total = 0;
+		Double total = new Double(0);
 
 		for(int i = 0; i < arr.length; i++)
 			total = total + arr[i].doubleValue();
 
-		return convertInstanceOfObject(total);
+        try{
+            return typeOfN.cast(total);
+        }
+        catch(ClassCastException e)
+        {
+            return typeOfN.cast(total.intValue());
+        }
 	}
 }

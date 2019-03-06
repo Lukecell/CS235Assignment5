@@ -3,7 +3,7 @@ public class NumberAnalyzerDemo
 	public static void main(String args[])
 	{
 		Integer arr[] = new Integer[100];
-		NumberAnalyzer <Integer>test = new NumberAnalyzer<>();
+		NumberAnalyzer <Integer>test = new NumberAnalyzer<>(Integer.class);
 
 		for(int i = 0; i < arr.length; i++)
 			arr[i] = i + 1;
